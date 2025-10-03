@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [[http://localhost:3000](http://localhost:3000](https://3000-822be517-efe7-465c-8839-657da89ff248.orchids.page/)) with your browser to see the result.
+Open (https://3000-822be517-efe7-465c-8839-657da89ff248.orchids.page/)) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
