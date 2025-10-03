@@ -32,16 +32,16 @@ export default function Contact() {
   };
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com/furqaabn", username: "@furqaabn" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Furqaabn Ahmed Shareef" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/furqaabn", username: "@furqaabn" },
-    { icon: Mail, label: "Email", href: "mailto:furqaabn@example.com", username: "furqaabn@example.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/furqaan", username: "@furqaan" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Furqaan Ahmed Shareef" },
+    { icon: Twitter, label: "Twitter", href: "https://twitter.com/furqaan", username: "@furqaan" },
+    { icon: Mail, label: "Email", href: "mailto:furqaan@example.com", username: "furqaan@example.com" },
   ];
 
   const contactInfo = [
     { icon: GraduationCap, label: "Education", value: "12th Grade Student" },
     { icon: MapPin, label: "Focus Areas", value: "IT & AI Skills Development" },
-    { icon: Mail, label: "Email", value: "furqaabn@example.com" },
+    { icon: Mail, label: "Email", value: "furqaan@example.com" },
   ];
 
   return (

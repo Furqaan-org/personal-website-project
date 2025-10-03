@@ -17,7 +17,7 @@ export default function Home() {
             <div className="text-center space-y-8">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
                 Hi, I'm{" "}
-                <span className="text-primary">Furqaabn Ahmed Shareef</span>
+                <span className="text-primary">Furqaan Ahmed Shareef</span>
               </h1>
               <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto">
                 A passionate 12th grade student exploring the exciting worlds of Information Technology and Artificial Intelligence. 

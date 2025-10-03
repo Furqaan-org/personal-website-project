@@ -53,7 +53,7 @@ export default function About() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                Hello! I'm Furqaabn Ahmed Shareef, a 12th-grade student with an insatiable curiosity for 
+                Hello! I'm Furqaan Ahmed Shareef, a 12th-grade student with an insatiable curiosity for 
                 technology and innovation. Currently, I'm immersing myself in the fascinating fields of 
                 Information Technology and Artificial Intelligence, learning new skills every day.
               </p>
