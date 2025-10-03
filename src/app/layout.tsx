@@ -3,6 +3,7 @@ import "./globals.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Your Name - Personal Website",
@@ -30,6 +31,7 @@ export default function RootLayout({
         />
         {children}
         <VisualEditsMessenger />
+        <Toaster />
       </body>
     </html>
   );
