@@ -33,8 +33,7 @@ export default function Contact() {
 
   const socialLinks = [
     { icon: Github, label: "GitHub", href: "https://github.com/Furqaan-org", username: "@Furqaan-org" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Furqaan Ahmed Shareef" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/furqaan", username: "@furqaan" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/furqaan-shareef-162346377/", username: "Furqaan Ahmed Shareef" },
     { icon: Mail, label: "Email", href: "mailto:furqaanahmed6786@gmail.com", username: "furqaanahmed6786@gmail.com" },
   ];
 
