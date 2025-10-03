@@ -32,16 +32,16 @@ export default function Contact() {
   };
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com/furqaan", username: "@furqaan" },
+    { icon: Github, label: "GitHub", href: "https://github.com/Furqaan-org", username: "@Furqaan-org" },
     { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Furqaan Ahmed Shareef" },
     { icon: Twitter, label: "Twitter", href: "https://twitter.com/furqaan", username: "@furqaan" },
-    { icon: Mail, label: "Email", href: "mailto:furqaan@example.com", username: "furqaan@example.com" },
+    { icon: Mail, label: "Email", href: "mailto:furqaanahmed6786@gmail.com", username: "furqaanahmed6786@gmail.com" },
   ];
 
   const contactInfo = [
     { icon: GraduationCap, label: "Education", value: "12th Grade Student" },
     { icon: MapPin, label: "Focus Areas", value: "IT & AI Skills Development" },
-    { icon: Mail, label: "Email", value: "furqaan@example.com" },
+    { icon: Mail, label: "Email", value: "furqaanahmed6786@gmail.com" },
   ];
 
   return (
