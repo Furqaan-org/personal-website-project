@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Code, Palette, Zap } from "lucide-react";
+import { ArrowRight, Code, Brain, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 
@@ -17,11 +17,11 @@ export default function Home() {
             <div className="text-center space-y-8">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
                 Hi, I'm{" "}
-                <span className="text-primary">Your Name</span>
+                <span className="text-primary">Furqaabn Ahmed Shareef</span>
               </h1>
               <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto">
-                A passionate creator, developer, and problem solver. 
-                Welcome to my personal space on the web.
+                A passionate 12th grade student exploring the exciting worlds of Information Technology and Artificial Intelligence. 
+                Building the future, one line of code at a time.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Link href="/projects">
@@ -45,8 +45,8 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                I'm dedicated to creating meaningful experiences and solving complex problems
-                through creativity and technology.
+                I'm a high school student with a deep passion for technology, constantly learning and 
+                experimenting with cutting-edge IT and AI technologies.
               </p>
             </div>
 
@@ -54,29 +54,29 @@ export default function Home() {
               <Card>
                 <CardHeader>
                   <Code className="h-10 w-10 mb-2 text-primary" />
-                  <CardTitle>Developer</CardTitle>
+                  <CardTitle>IT Enthusiast</CardTitle>
                   <CardDescription>
-                    Building clean, efficient code and bringing ideas to life through technology.
+                    Learning web development, programming languages, and building practical applications to solve real-world problems.
                   </CardDescription>
                 </CardHeader>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <Palette className="h-10 w-10 mb-2 text-primary" />
-                  <CardTitle>Designer</CardTitle>
+                  <Brain className="h-10 w-10 mb-2 text-primary" />
+                  <CardTitle>AI Explorer</CardTitle>
                   <CardDescription>
-                    Crafting beautiful, user-centric designs that make a lasting impression.
+                    Diving deep into machine learning, neural networks, and artificial intelligence to understand the technology shaping our future.
                   </CardDescription>
                 </CardHeader>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <Zap className="h-10 w-10 mb-2 text-primary" />
-                  <CardTitle>Innovator</CardTitle>
+                  <Sparkles className="h-10 w-10 mb-2 text-primary" />
+                  <CardTitle>Lifelong Learner</CardTitle>
                   <CardDescription>
-                    Always exploring new technologies and pushing the boundaries of what's possible.
+                    Always curious, always growing. Exploring new technologies, frameworks, and staying updated with the latest in tech.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -100,8 +100,8 @@ export default function Home() {
                 Let's Connect
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                I'm always open to new opportunities, collaborations, and conversations.
-                Feel free to reach out!
+                I'm always excited to connect with fellow tech enthusiasts, discuss ideas, 
+                or collaborate on interesting projects. Feel free to reach out!
               </p>
               <Link href="/contact">
                 <Button size="lg" className="gap-2">

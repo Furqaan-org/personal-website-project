@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Github, Linkedin, Twitter, MapPin, Phone } from "lucide-react";
+import { Mail, Github, Linkedin, Twitter, MapPin, GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -19,7 +19,6 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     alert("Thank you for your message! I'll get back to you soon.");
     setFormData({ name: "", email: "", subject: "", message: "" });
@@ -33,16 +32,16 @@ export default function Contact() {
   };
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com", username: "@yourusername" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Your Name" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com", username: "@yourusername" },
-    { icon: Mail, label: "Email", href: "mailto:your.email@example.com", username: "your.email@example.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/furqaabn", username: "@furqaabn" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", username: "Furqaabn Ahmed Shareef" },
+    { icon: Twitter, label: "Twitter", href: "https://twitter.com/furqaabn", username: "@furqaabn" },
+    { icon: Mail, label: "Email", href: "mailto:furqaabn@example.com", username: "furqaabn@example.com" },
   ];
 
   const contactInfo = [
-    { icon: MapPin, label: "Location", value: "Your City, Country" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-    { icon: Mail, label: "Email", value: "your.email@example.com" },
+    { icon: GraduationCap, label: "Education", value: "12th Grade Student" },
+    { icon: MapPin, label: "Focus Areas", value: "IT & AI Skills Development" },
+    { icon: Mail, label: "Email", value: "furqaabn@example.com" },
   ];
 
   return (
@@ -54,7 +53,7 @@ export default function Contact() {
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">Get in Touch</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Have a question or want to work together? I'd love to hear from you!
+              Interested in collaborating or discussing tech? I'd love to connect!
             </p>
           </div>
 
