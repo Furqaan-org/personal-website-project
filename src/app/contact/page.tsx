@@ -39,7 +39,21 @@ export default function Contact() {
       }
     } catch (error) {
       console.error("EmailJS error:", error);
-      toast.error("Failed to send message. Please try again or email me directly at furqaanahmed6786@gmail.com");
+      console.log("Message details:", formData);
+      
+      // Show user their message details so they can manually send
+      toast.error(
+        <div className="space-y-2">
+          <p className="font-semibold">Unable to send message automatically.</p>
+          <p className="text-sm">Please copy your message and email directly to:</p>
+          <p className="text-sm font-medium">furqaanahmed6786@gmail.com</p>
+          <div className="mt-2 p-2 bg-muted/50 rounded text-xs">
+            <p><strong>From:</strong> {formData.from_name} ({formData.from_email})</p>
+            <p className="mt-1"><strong>Message:</strong> {formData.message}</p>
+          </div>
+        </div>,
+        { duration: 10000 }
+      );
     } finally {
       setIsLoading(false);
     }
