@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send, User, MessageSquare, Github, MapPin, Clock } from "lucide-react";
+import { Mail, Send, User, MessageSquare, Github, MapPin, Clock, Linkedin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
@@ -127,6 +127,26 @@ export default function Contact() {
               <Card className="hover:shadow-lg transition-shadow duration-300 border-primary/20 hover:border-primary/40">
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                    <Linkedin className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">LinkedIn</CardTitle>
+                  <CardDescription>Connect professionally</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <a 
+                    href="https://www.linkedin.com/in/furqaan-shareef-162346377/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-primary hover:underline"
+                  >
+                    Furqaan Shareef
+                  </a>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow duration-300 border-primary/20 hover:border-primary/40">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
                     <Clock className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-lg">Response Time</CardTitle>
@@ -237,12 +257,18 @@ export default function Contact() {
             <Card className="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 border-primary/30">
               <CardContent className="pt-6 px-8 pb-6">
                 <p className="text-lg font-medium mb-2">Prefer to connect elsewhere?</p>
-                <p className="text-muted-foreground mb-4">Find me on GitHub or send a direct email</p>
+                <p className="text-muted-foreground mb-4">Find me on GitHub, LinkedIn or send a direct email</p>
                 <div className="flex gap-3 justify-center">
                   <Button variant="outline" size="sm" asChild>
                     <a href="https://github.com/Furqaan-org" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
                       GitHub
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://www.linkedin.com/in/furqaan-shareef-162346377/" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="h-4 w-4 mr-2" />
+                      LinkedIn
                     </a>
                   </Button>
                   <Button variant="outline" size="sm" asChild>
