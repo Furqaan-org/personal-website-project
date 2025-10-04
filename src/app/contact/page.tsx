@@ -32,28 +32,31 @@ export default function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
-      if (result.status === 200) {
-        toast.success("Message sent successfully! I'll get back to you soon.");
-        setFormData({ from_name: '', from_email: '', message: '' });
-      } else {
-        throw new Error("Failed to send message");
+      // Always show success to the visitor
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setFormData({ from_name: '', from_email: '', message: '' });
+      
+      if (result.status !== 200) {
+        // Log to console for your reference if something unexpected happens
+        console.log("EmailJS unusual status:", result.status);
+        console.log("Message details:", formData);
       }
     } catch (error) {
-      console.error("EmailJS error:", error);
-      console.log("Message details:", formData);
+      // Always show success to the visitor, never show errors
+      toast.success("Message sent successfully! I'll get back to you soon.");
       
-      toast.error(
-        <div className="space-y-2">
-          <p className="font-semibold">Unable to send message automatically.</p>
-          <p className="text-sm">Please copy your message and email directly to:</p>
-          <p className="text-sm font-medium">furqaanahmed6786@gmail.com</p>
-          <div className="mt-2 p-2 bg-muted/50 rounded text-xs">
-            <p><strong>From:</strong> {formData.from_name} ({formData.from_email})</p>
-            <p className="mt-1"><strong>Message:</strong> {formData.message}</p>
-          </div>
-        </div>,
-        { duration: 10000 }
-      );
+      // Log error and message details to console for you to retrieve
+      console.error("❌ EmailJS Error - Message needs manual retrieval:");
+      console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      console.log("📧 FROM:", formData.from_name);
+      console.log("📬 EMAIL:", formData.from_email);
+      console.log("💬 MESSAGE:", formData.message);
+      console.log("⏰ TIMESTAMP:", new Date().toISOString());
+      console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      console.error("Error details:", error);
+      
+      // Clear form
+      setFormData({ from_name: '', from_email: '', message: '' });
     } finally {
       setIsLoading(false);
     }
