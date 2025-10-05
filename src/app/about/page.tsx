@@ -37,7 +37,7 @@ export default function About() {
           {/* Header Section */}
           <div className="text-center mb-16">
             <Avatar className="h-32 w-32 mx-auto mb-6">
-              <AvatarImage src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile" />
+              <AvatarImage src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Generated-Image-October-04-2025-3_33PM-1759653729996.png" alt="Profile" />
               <AvatarFallback>FAS</AvatarFallback>
             </Avatar>
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">About Me</h1>
