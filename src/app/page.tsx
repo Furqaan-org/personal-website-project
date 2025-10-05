@@ -5,11 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowRight, Code, Brain, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
+import BackgroundAnimation from "@/components/BackgroundAnimation";
 
 export default function Home() {
   return (
     <>
       <Navigation />
+      <BackgroundAnimation />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
