@@ -1,14 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User } from "lucide-react";
 import { useState } from "react";
+import { useSession, authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session, isPending, refetch } = useSession();
 
   const links = [
     { href: "/", label: "Home" },
@@ -16,6 +28,18 @@ export default function Navigation() {
     { href: "/projects", label: "Projects" },
     { href: "/contact", label: "Contact" },
   ];
+
+  const handleSignOut = async () => {
+    const { error } = await authClient.signOut();
+    if (error?.code) {
+      toast.error(error.code);
+    } else {
+      localStorage.removeItem("bearer_token");
+      refetch();
+      router.push("/");
+      toast.success("Signed out successfully");
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -26,7 +50,7 @@ export default function Navigation() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -40,6 +64,42 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Auth Buttons */}
+            {!isPending && (
+              <>
+                {session?.user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="gap-2">
+                        <User className="h-4 w-4" />
+                        {session.user.name}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+                        Dashboard
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="sm" onClick={() => router.push("/login")}>
+                      Sign In
+                    </Button>
+                    <Button size="sm" onClick={() => router.push("/register")}>
+                      Sign Up
+                    </Button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,6 +130,60 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Mobile Auth Buttons */}
+            {!isPending && (
+              <div className="pt-4 border-t border-border space-y-2">
+                {session?.user ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start gap-2"
+                      onClick={() => {
+                        router.push("/dashboard");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      <User className="h-4 w-4" />
+                      {session.user.name}
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start gap-2 text-destructive"
+                      onClick={() => {
+                        handleSignOut();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full"
+                      onClick={() => {
+                        router.push("/login");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Sign In
+                    </Button>
+                    <Button 
+                      className="w-full"
+                      onClick={() => {
+                        router.push("/register");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
