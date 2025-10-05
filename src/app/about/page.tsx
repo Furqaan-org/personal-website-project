@@ -58,7 +58,7 @@ export default function About() {
               className="relative inline-block mb-6"
             >
               <Avatar className="h-40 w-40 ring-4 ring-primary/20 ring-offset-4 ring-offset-background">
-                <AvatarImage src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Generated-Image-October-04-2025-3_33PM-1759653729996.png" alt="Profile" />
+                <AvatarImage src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Screenshot-2025-10-05-124553-1759653980920.png" alt="Profile" />
                 <AvatarFallback className="text-2xl">FAS</AvatarFallback>
               </Avatar>
               <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground rounded-full p-2">
