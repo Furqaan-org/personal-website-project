@@ -59,7 +59,7 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,18 +67,9 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
-
       toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: '', email: '', message: '' });
       setErrors({});
-    } catch (error) {
-      console.error('Contact form error:', error);
-      toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
     } finally {
       setIsLoading(false);
     }
