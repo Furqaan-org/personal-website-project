@@ -4,59 +4,81 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send, User, MessageSquare, Github, MapPin, Clock, Linkedin } from "lucide-react";
+import { Mail, Send, User, MessageSquare, Github, Clock, Linkedin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import emailjs from '@emailjs/browser';
 import Navigation from "@/components/Navigation";
-
-emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    from_name: '',
-    from_email: '',
+    name: '',
+    email: '',
     message: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
-  const handleSubmit = async (e) => {
+  // Client-side validation
+  const validateForm = () => {
+    const newErrors: { name?: string; email?: string; message?: string } = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.length > 100) {
+      newErrors.name = "Name is too long (max 100 characters)";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    } else if (formData.message.length > 1000) {
+      newErrors.message = "Message is too long (max 1000 characters)";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form
+    if (!validateForm()) {
+      toast.error("Please fix the errors in the form");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        e.target,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      );
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // Always show success to the visitor
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormData({ from_name: '', from_email: '', message: '' });
-      
-      if (result.status !== 200) {
-        // Log to console for your reference if something unexpected happens
-        console.log("EmailJS unusual status:", result.status);
-        console.log("Message details:", formData);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
       }
-    } catch (error) {
-      // Always show success to the visitor, never show errors
+
       toast.success("Message sent successfully! I'll get back to you soon.");
-      
-      // Log error and message details to console for you to retrieve
-      console.error("❌ EmailJS Error - Message needs manual retrieval:");
-      console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-      console.log("📧 FROM:", formData.from_name);
-      console.log("📬 EMAIL:", formData.from_email);
-      console.log("💬 MESSAGE:", formData.message);
-      console.log("⏰ TIMESTAMP:", new Date().toISOString());
-      console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-      console.error("Error details:", error);
-      
-      // Clear form
-      setFormData({ from_name: '', from_email: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({});
+    } catch (error) {
+      console.error('Contact form error:', error);
+      toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -174,37 +196,51 @@ export default function Contact() {
                 <CardContent className="pt-6">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                      <label htmlFor="from_name" className="text-sm font-semibold flex items-center gap-2">
+                      <label htmlFor="name" className="text-sm font-semibold flex items-center gap-2">
                         <User className="h-4 w-4 text-primary" />
                         Your Name
                       </label>
                       <Input
-                        id="from_name"
-                        name="from_name"
+                        id="name"
+                        name="name"
                         type="text"
                         placeholder="John Doe"
-                        value={formData.from_name}
-                        onChange={(e) => setFormData({ ...formData, from_name: e.target.value })}
-                        required
-                        className="h-12 border-primary/20 focus:border-primary transition-colors"
+                        value={formData.name}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (errors.name) setErrors({ ...errors, name: undefined });
+                        }}
+                        className={`h-12 border-primary/20 focus:border-primary transition-colors ${errors.name ? 'border-destructive' : ''}`}
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                       />
+                      {errors.name && (
+                        <p id="name-error" className="text-sm text-destructive">{errors.name}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="from_email" className="text-sm font-semibold flex items-center gap-2">
+                      <label htmlFor="email" className="text-sm font-semibold flex items-center gap-2">
                         <Mail className="h-4 w-4 text-primary" />
                         Your Email
                       </label>
                       <Input
-                        id="from_email"
-                        name="from_email"
+                        id="email"
+                        name="email"
                         type="email"
                         placeholder="john@example.com"
-                        value={formData.from_email}
-                        onChange={(e) => setFormData({ ...formData, from_email: e.target.value })}
-                        required
-                        className="h-12 border-primary/20 focus:border-primary transition-colors"
+                        value={formData.email}
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (errors.email) setErrors({ ...errors, email: undefined });
+                        }}
+                        className={`h-12 border-primary/20 focus:border-primary transition-colors ${errors.email ? 'border-destructive' : ''}`}
+                        aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                       />
+                      {errors.email && (
+                        <p id="email-error" className="text-sm text-destructive">{errors.email}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
@@ -217,10 +253,20 @@ export default function Contact() {
                         name="message"
                         placeholder="Tell me about your project, question, or just say hi..."
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        required
-                        className="min-h-[160px] border-primary/20 focus:border-primary transition-colors resize-none"
+                        onChange={(e) => {
+                          setFormData({ ...formData, message: e.target.value });
+                          if (errors.message) setErrors({ ...errors, message: undefined });
+                        }}
+                        className={`min-h-[160px] border-primary/20 focus:border-primary transition-colors resize-none ${errors.message ? 'border-destructive' : ''}`}
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? "message-error" : undefined}
                       />
+                      {errors.message && (
+                        <p id="message-error" className="text-sm text-destructive">{errors.message}</p>
+                      )}
+                      <p className="text-xs text-muted-foreground">
+                        {formData.message.length}/1000 characters
+                      </p>
                     </div>
 
                     <Button 
